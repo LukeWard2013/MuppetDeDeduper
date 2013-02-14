@@ -12,7 +12,7 @@ namespace DedupeMuppet
             _dedupeStrategies = dedupeStrategies;
         }
 
-        public IEnumerable<IGrouping<StrategySignature, Customer>> Dedupe(IEnumerable<Customer> customers)
+        public IEnumerable<IGrouping<StrategySignature, Company>> Dedupe(IEnumerable<Company> customers)
         {
             return from customer in customers
                    from strategy in _dedupeStrategies

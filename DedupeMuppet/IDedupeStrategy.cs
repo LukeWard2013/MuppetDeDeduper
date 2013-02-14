@@ -2,6 +2,6 @@
 {
     public interface IDedupeStrategy
     {
-        string Signature(Customer customer);
+        string Signature(Company company);
     }
 }

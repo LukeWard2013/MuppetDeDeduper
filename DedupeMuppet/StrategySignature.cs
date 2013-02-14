@@ -1,4 +1,6 @@
-﻿namespace DedupeMuppet
+﻿using System;
+
+namespace DedupeMuppet
 {
     public class StrategySignature
     {

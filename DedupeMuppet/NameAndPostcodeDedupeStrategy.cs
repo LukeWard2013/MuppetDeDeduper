@@ -2,9 +2,9 @@
 {
     public class NameAndPostcodeDedupeStrategy : IDedupeStrategy
     {
-        public string Signature(Customer customer)
+        public string Signature(Company company)
         {
-            return customer.Name + ":" + customer.PostCode;
+            return company.Name + ":" + company.PostCode;
         }
     }
 }

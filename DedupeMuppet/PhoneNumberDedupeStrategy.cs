@@ -2,9 +2,9 @@
 {
     public class PhoneNumberDedupeStrategy : IDedupeStrategy
     {
-        public string Signature(Customer customer)
+        public string Signature(Company company)
         {
-            return customer.Telephone;
+            return company.Telephone;
         }
     }
 }

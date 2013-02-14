@@ -47,10 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Deduper.cs" />
-    <Compile Include="Customer.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="CustomerTest.cs" />
-    <Compile Include="GroupedCustomer.cs" />
     <Compile Include="IDedupeStrategy.cs" />
+    <Compile Include="NameAddressAndPostcodeDedupeStrategy.cs" />
     <Compile Include="NameAndPostcodeDedupeStrategy.cs" />
     <Compile Include="PhoneNumberDedupeStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
