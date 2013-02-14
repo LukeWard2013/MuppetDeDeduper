@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Should;
@@ -12,6 +11,10 @@ namespace DedupeMuppet
     {
         private IGrouping<StrategySignature, Company>[] _deduped;
 
+        private readonly Deduper _deduper = new Deduper(new NameAddressAndPostcodeDedupeStrategy(),
+                                                        new NameAndPostcodeDedupeStrategy(),
+                                                        new PhoneNumberDedupeStrategy(),
+                                                        new TruncatedNameStrategy());
         [SetUp]
         public void SetUp()
         {
@@ -48,11 +51,7 @@ namespace DedupeMuppet
 
                 };
 
-            var deduper = new Deduper(new NameAddressAndPostcodeDedupeStrategy(),
-                                      new NameAndPostcodeDedupeStrategy(),
-                                      new PhoneNumberDedupeStrategy());
-
-            _deduped = deduper.Dedupe(customers).ToArray();
+            _deduped = _deduper.Dedupe(customers).ToArray();
         }
 
         [Test]
@@ -60,6 +59,13 @@ namespace DedupeMuppet
         {
             var group = _deduped.GetGroupContaining(1, 2);
             group.Key.Strategy.ShouldBeType<NameAndPostcodeDedupeStrategy>();
+        }
+
+        [Test]
+        public void Should_be_one_group_containing_4_and_5_using_name_and_postcode_match()
+        {
+            var group = _deduped.GetGroupContaining(4, 5);
+            group.Key.Strategy.ShouldBeType<TruncatedNameStrategy>();
         }
 
         [Test]

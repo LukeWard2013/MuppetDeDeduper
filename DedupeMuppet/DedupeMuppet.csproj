@@ -55,6 +55,7 @@
     <Compile Include="PhoneNumberDedupeStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StrategySignature.cs" />
+    <Compile Include="TruncatedNameStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
