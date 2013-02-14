@@ -56,8 +56,10 @@ namespace DedupeMuppet
         [Test]
         public void Should_be_one_group_containing_1_and_2_using_name_and_postcode_match()
         {
+            //var group = _deduped.GetGroupContaining(1, 2);
+
             _deduped.Any(d => d.Dupe.Select(dupe => dupe.Id).ShouldContainOnly(1, 2)
-                            && d.StrategyType == typeof(NameAndPostcodeDedupeStrategy)).ShouldBeTrue();
+                            && d.StrategyType == typeof(PhoneNumberDedupeStrategy)).ShouldBeTrue();
         }
 
         [Test]
@@ -109,6 +111,10 @@ namespace DedupeMuppet
         {
             Console.WriteLine(string.Join(", ", actual));
             return actual.SequenceEqual(expected);
+        }
+        public static void GetGroupContaining(this GroupedCustomer[] groups, params int[] expectedIds)
+        {
+           // groups.First(g => g.Dupe.Select(dupe => dupe.Id).ShouldContainOnly(1, 2)
         }
     }
 }
