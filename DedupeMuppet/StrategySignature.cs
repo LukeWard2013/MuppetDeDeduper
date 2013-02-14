@@ -1,4 +1,5 @@
 ﻿using System;
+using DedupeMuppet.Strategies;
 
 namespace DedupeMuppet
 {

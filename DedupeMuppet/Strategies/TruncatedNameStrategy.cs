@@ -1,4 +1,4 @@
-﻿namespace DedupeMuppet
+﻿namespace DedupeMuppet.Strategies
 {
     public class TruncatedNameStrategy : IDedupeStrategy
     {
