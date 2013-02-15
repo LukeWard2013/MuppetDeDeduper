@@ -25,10 +25,12 @@ namespace DedupeMuppet
 
         private string TruncateName(string name)
         {
-            string[] commonWords = { "Dr.", "Dr", "DRIVE", "DRV", "DRV.", "PLC", "PLC.", "AND", "THE", "AVE", "AV", "AV.", "STR", "ST", "STREET", "LANE", "LN.", "RD", "RD.", "ROAD" };
+            string[] commonWords = { "BROTHERS", "COMPANY", "LIMITED", "BROS.", "BROS", "PLC.", "CO.", "LTD.","LTD","PLC", "AND", "THE", "CO"};
+            name = name.ToUpper();
+
             foreach (var commonWord in commonWords)
             {
-                name.Replace(commonWord, "");
+                name = name.Replace(commonWord.ToUpper(), "");
             }
 
             char[] arr = name.ToCharArray();

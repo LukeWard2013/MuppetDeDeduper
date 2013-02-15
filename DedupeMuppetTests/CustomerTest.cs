@@ -64,6 +64,13 @@ namespace DedupeMuppetTests
         }
 
         [Test]
+        public void Should_be_my_test_company()
+        {
+            var company = new Company(0, "My Test Ltd.", "", "", "");
+            company.TruncatedName.ShouldEqual("mytest");
+        }
+
+        [Test]
         public void Should_be_one_group_containing_9_and_10_using_name_and_postcode_match()
         {
             var group = _deduped.GetGroupContaining(9, 10);
@@ -117,15 +124,15 @@ namespace DedupeMuppetTests
         [Test]
         public void Should_Be_ejsnellson()
         {
-            var customer = new Company(0, "Ej Snell & Sons Ltd", "", "", "");
-            customer.TruncatedName.ShouldEqual("ejsnellson");
+            var company = new Company(0, "Ej Snell & Sons Ltd", "", "", "");
+            company.TruncatedName.ShouldEqual("ejsnellson");
         }
 
         [Test]
-        public void Should_Be_companya()
+        public void Should_Be_a()
         {
             var customer = new Company(0, "Company A", "", "", "");
-            customer.TruncatedName.ShouldEqual("companya");
+            customer.TruncatedName.ShouldEqual("a");
         }
     }
 
