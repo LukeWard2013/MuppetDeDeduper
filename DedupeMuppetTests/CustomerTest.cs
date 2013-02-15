@@ -64,10 +64,24 @@ namespace DedupeMuppetTests
         }
 
         [Test]
-        public void Should_be_my_test_company()
+        public void Should_be_myname()
         {
-            var company = new Company(0, "My Test Ltd.", "", "", "");
-            company.TruncatedName.ShouldEqual("mytest");
+            var company = new Company(0, "My Name Ltd.", "", "", "");
+            company.TruncatedName.ShouldEqual("myname");
+        }
+
+        [Test]
+        public void Should_be_88hewit()
+        {
+            var company = new Company(0, "", "88 Hewit Street", "", "");
+            company.TruncatedAddress.ShouldEqual("88hewit");
+        }
+
+        [Test]
+        public void Should_be_JustThisTextLeft_for_truncated_address()
+        {
+            var company = new Company(0,"", "Just Street, This, Avenue,Text Left Drive.", "", "");
+            company.TruncatedAddress.ShouldEqual("justthistextleft");
         }
 
         [Test]
