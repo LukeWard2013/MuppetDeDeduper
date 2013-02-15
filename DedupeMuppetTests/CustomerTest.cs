@@ -80,7 +80,7 @@ namespace DedupeMuppetTests
         [Test]
         public void Should_be_JustThisTextLeft_for_truncated_address()
         {
-            var company = new Company(0,"", "Just Street, This, Avenue,Text Left Drive.", "", "");
+            var company = new Company(0, "", "Just Street, This, Avenue,Text Left Drive.", "", "");
             company.TruncatedAddress.ShouldEqual("justthistextleft");
         }
 

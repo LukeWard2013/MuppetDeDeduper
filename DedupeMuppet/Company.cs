@@ -32,7 +32,7 @@ namespace DedupeMuppet
             //Strip common words from company name
             string[] commonWords = { "BROTHERS", "LIMITED", "COMPANY", "BROS.", "BROS", "PLC.", "CO.", "LTD.", "LTD", "PLC", "AND", "THE", "CO" };
             name = StripWords(name, commonWords);
-
+            
             //remove and non alphanumeric characters
             char[] arr = name.ToCharArray();
 
