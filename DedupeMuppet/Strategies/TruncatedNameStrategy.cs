@@ -1,6 +1,6 @@
 ﻿namespace DedupeMuppet.Strategies
 {
-    public class TruncatedNameStrategy : IDedupeStrategy
+    public class TruncatedNameAndPostcodeStrategy : IDedupeStrategy
     {
         public string Signature(Company company)
         {

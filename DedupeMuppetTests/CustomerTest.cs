@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DedupeMuppet;
 using DedupeMuppet.Strategies;
 using NUnit.Framework;
 using Should;
 using Should.Core.Exceptions;
 
-namespace DedupeMuppet
+namespace DedupeMuppetTests
 {
     [TestFixture]
     public class CustomerTest
@@ -15,7 +16,7 @@ namespace DedupeMuppet
         private readonly Deduper _deduper = new Deduper(new NameAddressAndPostcodeDedupeStrategy(),
                                                         new NameAndPostcodeDedupeStrategy(),
                                                         new PhoneNumberDedupeStrategy(),
-                                                        new TruncatedNameStrategy());
+                                                        new TruncatedNameAndPostcodeStrategy());
         [SetUp]
         public void SetUp()
         {
@@ -46,9 +47,9 @@ namespace DedupeMuppet
                     new Company(8, "Stratfords Tools Ltd", "80 London Street", "WN1 0PG", "phone6"),
                     // ------------------------------------------------------
 
-                    ////Dupe 4 contains a Name and Postcode match and also matches Dupe 3 as an Truncated Name and Postcode match, this should be ignored
-                    //new Company("Stratfords Ltd", "80 Hewit Street", "WN1 0PG", "00000000005"),
-                    //new Company("Stratfords Ltd", "88 Hewit Street", "WN1 0PG", "00000000006"),
+                    //Dupe 4 contains a Name and Postcode match and also matches Dupe 3 as an Truncated Name and Postcode match, this should be ignored
+                    new Company(9,"Stratfords Ltd", "80 Hewit Street", "WN1 0PG", "00000000005"),
+                    new Company(10,"Stratfords Ltd", "88 Hewit Street", "WN1 0PG", "00000000006"),
 
                 };
 
@@ -63,10 +64,17 @@ namespace DedupeMuppet
         }
 
         [Test]
+        public void Should_be_one_group_containing_9_and_10_using_name_and_postcode_match()
+        {
+            var group = _deduped.GetGroupContaining(9, 10);
+            group.Key.Strategy.ShouldBeType<NameAndPostcodeDedupeStrategy>();
+        }
+
+        [Test]
         public void Should_be_one_group_containing_4_and_5_using_name_and_postcode_match()
         {
             var group = _deduped.GetGroupContaining(4, 5);
-            group.Key.Strategy.ShouldBeType<TruncatedNameStrategy>();
+            group.Key.Strategy.ShouldBeType<TruncatedNameAndPostcodeStrategy>();
         }
 
         [Test]

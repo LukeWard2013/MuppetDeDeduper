@@ -25,6 +25,12 @@ namespace DedupeMuppet
 
         private string TruncateName(string name)
         {
+            string[] commonWords = { "Dr.", "Dr", "DRIVE", "DRV", "DRV.", "PLC", "PLC.", "AND", "THE", "AVE", "AV", "AV.", "STR", "ST", "STREET", "LANE", "LN.", "RD", "RD.", "ROAD" };
+            foreach (var commonWord in commonWords)
+            {
+                name.Replace(commonWord, "");
+            }
+
             char[] arr = name.ToCharArray();
 
             arr = Array.FindAll(arr, (c => (char.IsLetterOrDigit(c))));
