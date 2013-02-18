@@ -11,10 +11,10 @@ namespace DedupeMuppet
             Id = id;
             Name = name;
             Address = address;
-            TruncatedAddress = TruncateAddress(address);
+            TruncatedAddress = TruncateText(address, false);
             PostCode = postcode;
             Telephone = telephone;
-            TruncatedName = TruncateName(name);
+            TruncatedName = TruncateText(name, true);
         }
 
         public int Id { get; set; }
@@ -26,29 +26,23 @@ namespace DedupeMuppet
         public string PostCode { get; set; }
         public string Telephone { get; set; }
 
-
-        private string TruncateName(string name)
+        private string TruncateText(string name, bool isCompanyName)
         {
-            //Strip common words from company name
-            string[] commonWords = { "BROTHERS", "LIMITED", "COMPANY", "BROS.", "BROS", "PLC.", "CO.", "LTD.", "LTD", "PLC", "AND", "THE", "CO" };
-            name = StripWords(name, commonWords);
+            string[] commonWords;
+
+            commonWords = isCompanyName ? new string[]{ "BROTHERS", "LIMITED", "COMPANY", "BROS.", "BROS", "PLC.", "CO.", "LTD.", "LTD", "PLC", "AND", "THE", "CO" } : new string[]{ " AVENUE", " STREET", " DRIVE", " DRV.", " PLC.", " LANE", " ROAD", " DRV", " Dr.", " PLC", " AND", "THE ", " AVE", " AV.", " STR", " RD.", " AV", " Dr", " ST", " LN.", " RD" };
             
-            //remove and non alphanumeric characters
-            char[] arr = name.ToCharArray();
-
-            arr = Array.FindAll(arr, (c => (char.IsLetterOrDigit(c))));
-            return new string(arr).Substring(0, arr.Length < 10 ? arr.Length : 10).ToLower();
-        }
-
-        private string TruncateAddress(string name)
-        {
-            string[] commonWords = { " AVENUE", " STREET", " DRIVE", " DRV.", " PLC.", " LANE" , " ROAD", " DRV", " Dr.", " PLC", " AND", "THE ", " AVE", " AV.", " STR", " RD.", " AV", " Dr", " ST", " LN.", " RD" };
             name = StripWords(name, commonWords);
 
             //remove any symbols
-            char[] arr = name.ToCharArray();
+            var arr = name.ToCharArray();
 
             arr = Array.FindAll(arr, (c => (char.IsLetterOrDigit(c))));
+
+            if (isCompanyName)
+            {
+                return new string(arr).Substring(0, arr.Length < 10 ? arr.Length : 10).ToLower();    
+            }
             return new string(arr).ToLower();
         }
 

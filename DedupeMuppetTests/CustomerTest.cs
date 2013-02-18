@@ -64,27 +64,6 @@ namespace DedupeMuppetTests
         }
 
         [Test]
-        public void Should_be_myname()
-        {
-            var company = new Company(0, "My Name Ltd.", "", "", "");
-            company.TruncatedName.ShouldEqual("myname");
-        }
-
-        [Test]
-        public void Should_be_88hewit()
-        {
-            var company = new Company(0, "", "88 Hewit Street", "", "");
-            company.TruncatedAddress.ShouldEqual("88hewit");
-        }
-
-        [Test]
-        public void Should_be_JustThisTextLeft_for_truncated_address()
-        {
-            var company = new Company(0, "", "Just Street, This, Avenue,Text Left Drive.", "", "");
-            company.TruncatedAddress.ShouldEqual("justthistextleft");
-        }
-
-        [Test]
         public void Should_be_one_group_containing_9_and_10_using_name_and_postcode_match()
         {
             var group = _deduped.GetGroupContaining(9, 10);
@@ -133,20 +112,6 @@ namespace DedupeMuppetTests
         {
             var group = _deduped.GetGroupContaining(1, 2);
             group.Key.Strategy.ShouldBeType<NameAndPostcodeDedupeStrategy>();
-        }
-
-        [Test]
-        public void Should_Be_ejsnellson()
-        {
-            var company = new Company(0, "Ej Snell & Sons Ltd", "", "", "");
-            company.TruncatedName.ShouldEqual("ejsnellson");
-        }
-
-        [Test]
-        public void Should_Be_a()
-        {
-            var customer = new Company(0, "Company A", "", "", "");
-            customer.TruncatedName.ShouldEqual("a");
         }
     }
 
