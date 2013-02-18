@@ -6,15 +6,21 @@ namespace DedupeMuppet
 {
     public class Company
     {
+        private static readonly string[] CompanyStopWords = new[]
+            {"BROTHERS", "LIMITED", "COMPANY", "BROS.", "BROS", "PLC.", "CO.", "LTD.", "LTD", "PLC", "AND", "THE", "CO"}; 
+
+        private static readonly string[] AddressStopWords = new []
+            { " AVENUE", " STREET", " DRIVE", " DRV.", " PLC.", " LANE", " ROAD", " DRV", " Dr.", " PLC", " AND", "THE ", " AVE", " AV.", " STR", " RD.", " AV", " Dr", " ST", " LN.", " RD" };
+
         public Company(int id, string name, string address, string postcode, string telephone)
         {
             Id = id;
             Name = name;
             Address = address;
-            TruncatedAddress = TruncateText(address, false);
+            TruncatedAddress = TruncateText(address, AddressStopWords);
             PostCode = postcode;
             Telephone = telephone;
-            TruncatedName = TruncateText(name, true);
+            TruncatedName = TruncateText(name, CompanyStopWords, 10);
         }
 
         public int Id { get; set; }
@@ -26,22 +32,17 @@ namespace DedupeMuppet
         public string PostCode { get; set; }
         public string Telephone { get; set; }
 
-        private string TruncateText(string name, bool isCompanyName)
+        private string TruncateText(string text, IEnumerable<string> stopwords, int maxLength = int.MaxValue)
         {
-            string[] commonWords = isCompanyName ? new string[]{ "BROTHERS", "LIMITED", "COMPANY", "BROS.", "BROS", "PLC.", "CO.", "LTD.", "LTD", "PLC", "AND", "THE", "CO" } : new string[]{ " AVENUE", " STREET", " DRIVE", " DRV.", " PLC.", " LANE", " ROAD", " DRV", " Dr.", " PLC", " AND", "THE ", " AVE", " AV.", " STR", " RD.", " AV", " Dr", " ST", " LN.", " RD" };
-            
-            name = StripWords(name, commonWords);
+            text=StripWords(text, stopwords);
 
             //remove any symbols
-            var arr = name.ToCharArray();
+            var arr = text.ToCharArray();
 
             arr = Array.FindAll(arr, (c => (char.IsLetterOrDigit(c))));
 
-            if (isCompanyName)
-            {
-                return new string(arr).Substring(0, arr.Length < 10 ? arr.Length : 10).ToLower();    
-            }
-            return new string(arr).ToLower();
+            return new string(arr).Substring(0, arr.Length < maxLength ? arr.Length : maxLength).ToLower();    
+
         }
 
         private string StripWords(string textToStripFrom, IEnumerable<string> wordsToStrip)

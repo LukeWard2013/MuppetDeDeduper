@@ -55,7 +55,7 @@ namespace DedupeMuppetTests
 
             _deduped = _deduper.Dedupe(customers).ToArray();
         }
-
+        
         [Test]
         public void Should_be_one_group_containing_1_and_2_using_name_and_postcode_match()
         {
