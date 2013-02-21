@@ -54,6 +54,7 @@ namespace DedupeMuppetTests
                 };
 
             _deduped = _deduper.Dedupe(customers).ToArray();
+
         }
         
         [Test]

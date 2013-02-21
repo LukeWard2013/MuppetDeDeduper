@@ -31,6 +31,7 @@ namespace DedupeMuppet
         public string TruncatedAddress { get; set; }
         public string PostCode { get; set; }
         public string Telephone { get; set; }
+        public int DeDupeGroup { get; set; }
 
         private string TruncateText(string text, IEnumerable<string> stopwords, int maxLength = int.MaxValue)
         {
