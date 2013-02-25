@@ -45,6 +45,7 @@
     <Compile Include="CompanyNameTest.cs" />
     <Compile Include="CustomerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecondPassGroupingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DedupeMuppet\DedupeMuppet.csproj">
