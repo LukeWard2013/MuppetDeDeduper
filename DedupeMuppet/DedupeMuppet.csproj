@@ -31,12 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombineGroup.cs" />
     <Compile Include="Deduper.cs" />
     <Compile Include="Company.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="SecondStageDeduper.cs" />
     <Compile Include="Strategies\IDedupeStrategy.cs" />
     <Compile Include="Strategies\NameAddressAndPostcodeDedupeStrategy.cs" />
     <Compile Include="Strategies\NameAndPostcodeDedupeStrategy.cs" />
