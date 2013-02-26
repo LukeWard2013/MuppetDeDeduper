@@ -34,7 +34,7 @@ namespace DedupeMuppetTests
         [Test]
         public void Should_be_one_group_containing_1_2_and_3_after_second_pass()
         {
-            var groups = new SecondStageDeduper(_deduped).Combine();
+            var groups = new SecondStageSetDeduper(_deduped).Combine();
             groups.ShouldContainGroup(1, 2, 3);
         }
     }

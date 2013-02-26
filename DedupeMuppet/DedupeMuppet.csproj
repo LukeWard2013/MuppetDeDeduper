@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CombineGroup.cs" />
+    <Compile Include="CompanyComparer.cs" />
     <Compile Include="Deduper.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="EnumerableExtensions.cs" />

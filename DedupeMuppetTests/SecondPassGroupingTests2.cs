@@ -14,7 +14,7 @@ namespace DedupeMuppetTests
         private readonly Deduper _deduper = new Deduper(new NameAddressAndPostcodeDedupeStrategy(),
                                                         new NameAndPostcodeDedupeStrategy(),
                                                         new PhoneNumberDedupeStrategy(),
-                                                        new TruncatedNameAndPostcodeStrategy());
+                                                        new TruncatedNameAndPostcodeStrategy()); 
 
         [SetUp]
         public void TestData()
@@ -33,8 +33,8 @@ namespace DedupeMuppetTests
                     new Company(6, "Company C", "123 London Street", "WN1 0PG", "phone4"),
                     // ------------------------------------------------------
 
-                    new Company(7, "Stratfords Tools Ltd", "80 London Street", "WN1 0PG", "phone5"),
-                    new Company(8, "Stratfords Tools Ltd", "80 London Street", "WN1 0PG", "phone6"),
+                    new Company(7, "Stratfords Tools Ltd", "80 London Street", "WN1 0PG", "phone6"),
+                    new Company(8, "Stratfords Tools Ltd", "80 London Street", "WN1 0PG", "phone7"),
                     // ------------------------------------------------------
 
                     //Dupe 4 contains a Name and Postcode match and also matches Dupe 3 as an Truncated Name and Postcode match, this should be ignored
@@ -45,11 +45,13 @@ namespace DedupeMuppetTests
             _deduped = _deduper.Dedupe(customers).ToArray();
         }
 
-        [Test]
-        public void Should_be_one_group_containing_1_2_and_3_after_second_pass()
+        [TestCase(1,2,3)]
+        [TestCase(4,5)]
+        [TestCase(7,8,9,10)]
+        public void Should_be_one_group_containing_after_second_pass(params int[] companyIds)
         {
-            var groups = new SecondStageDeduper(_deduped).Combine();
-            groups.ShouldContainGroup(1, 2, 3);
+            var groups = new SecondStageSetDeduper(_deduped).Combine();
+            groups.ShouldContainGroup(companyIds);
         }
     }
 }
